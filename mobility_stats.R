@@ -7,10 +7,10 @@ library(ggrepel)
 peru <- read_csv("data/Global_Mobility_Report.csv") %>% 
   filter(country_region == "Peru") %>% 
   gather(key = tipo, value = change, -(country_region_code:date)) %>% 
-  mutate(tipo = case_when(str_starts(tipo,"groce") ~ "Farmacia y supermercado",
+  mutate(tipo = case_when(str_starts(tipo,"groce") ~ "Farmacia y Supermercado",
                           str_starts(tipo,"parks") ~ "Parques",
                           str_starts(tipo,"residential") ~ "Domicilio",
-                          str_starts(tipo,"retail") ~ "Restaurantes y recreación",
+                          str_starts(tipo,"retail") ~ "Restaurantes y Recreación",
                           str_starts(tipo,"transit") ~ "Transporte",
                           str_starts(tipo,"workplace") ~ "Trabajo"
   ))
@@ -43,6 +43,8 @@ peru %>%
              x = Inf, y = -Inf, hjust= 3.5, vjust=-1,
              inherit.aes = FALSE, segment.size = 0) +
   xlab("Fecha") + ylab("% de cambio respecto a movimiento habitual") +
-  theme_bw()
+  labs(color=" Categoría de Lugar") +
+  theme_bw() +
+  theme(axis.text.x = element_text(size=6))
 
 
